@@ -46,7 +46,8 @@ export async function BuyCourse(
       )
       return
     }
-
+    console.log("script loaded");
+    console.log(courses);
     // Initiating the Order in Backend
     const orderResponse = await apiConnector(
       "POST",
@@ -58,7 +59,8 @@ export async function BuyCourse(
         Authorization: `Bearer ${token}`,
       }
     )
-
+    console.log("order created");
+    console.log(orderResponse);
     if (!orderResponse.data.success) {
       throw new Error(orderResponse.data.message)
     }
@@ -91,7 +93,7 @@ export async function BuyCourse(
     })
   } catch (error) {
     console.log("PAYMENT API ERROR............", error)
-    toast.error("Could Not make Payment.")
+    toast.error(error)
   }
   toast.dismiss(toastId)
 }

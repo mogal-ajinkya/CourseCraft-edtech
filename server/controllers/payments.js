@@ -41,8 +41,10 @@ exports.capturePayment = async (req, res) => {
           .json({ success: false, message: "Student is already Enrolled" })
       }
 
-      // Add the price of the course to the total amount
+      // Add the price of the course to the total amount 
+      // free course payment case is not add 
       total_amount += course.price
+      console.log("the total amount ",total_amount);
     } catch (error) {
       console.log(error)
       return res.status(500).json({ success: false, message: error.message })

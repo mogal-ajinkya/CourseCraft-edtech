@@ -31,7 +31,7 @@ exports.auth = async (req, res, next) => {
 				.status(401)
 				.json({ success: false, message: "token is invalid" });
 		}
-
+		console.log("done");
 		// If JWT is valid, move on to the next middleware or request handler
 		next();
 	} catch (error) {
@@ -45,11 +45,12 @@ exports.auth = async (req, res, next) => {
 exports.isStudent = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
-
+		console.log(req.body);
+		console.log(userDetails)
 		if (userDetails.accountType !== "Student") {
 			return res.status(401).json({
 				success: false,
-				message: "This is a Protected Route for Students",
+				message: "This is a Protected Route for Students , Instructor cant buy course",
 			});
 		}
 		next();

@@ -72,6 +72,10 @@ exports.deleteAccount = async (req, res) => {
     await Profile.findByIdAndDelete({
       _id: new mongoose.Types.ObjectId(user.additionalDetails),
     })
+
+    // The $pull operator removes from an existing array all instances of a value or
+    //  values that match a specified condition.
+
     for (const courseId of user.courses) {
       await Course.findByIdAndUpdate(
         courseId,
